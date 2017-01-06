@@ -6,10 +6,10 @@
 * Extract the zip file. The root folder will be UCI HAR Dataset
 * Ensure that dplyr and reshape2 packages are installed
 * Run run_analysis.R from folder UCI HAR Dataset
-* It will generate following two outputs files:
-1. tidy_dataset_1.csv: data set containing mean and standard deviation measurement of
+* It will generate following two dataset and one output file:
+1. tidy dataset1: data set containing mean and standard deviation measurement of
    variables along with subject and activity label name
-2. tidy_dataset_2_summarymean.csv: data set containing mean of all variables for each
+2. tidy_dataset_2_summarymean.txt: data set containing mean of all variables for each
    subject and activity label name
 
 

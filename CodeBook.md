@@ -151,10 +151,10 @@ mean: mean value and std: standard deviation
 * subject: integer number 1 to 30
 
 ### Running run_analysis.R
-This script reads input files to generate following two data sets:
-* tidy_dataset_1.csv: data set containing mean and standard deviation measurement of
+This script reads input files to generate following two data sets and one out put file:
+* tidy dataset 1: data set containing mean and standard deviation measurement of
   variables along with subject and activity label name
-* tidy_dataset_2_summarymean.csv: data set containing mean of all variables for each
+* tidy_dataset_2_summarymean.txt: data set containing mean of all variables for each
   subject and activity label name
 
 Before running run_analysis.R, following steps need to be completed:

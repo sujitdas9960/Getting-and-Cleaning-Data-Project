@@ -5,8 +5,8 @@
 ## Appended activity label (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING,
 ## STANDING and LAYING) and subject (integer 1 to 30) to the merged data set. This
 ## created the first tidy data set
-## The second tidy data set was obtained by averaging the mean and stand deviation
-## variable measurements for each subject and activity label name
+## The second tidy data set was obtained by averaging the mean and standard
+## deviation variable measurements for each subject and activity label name
 
 ## read column names
 features <- read.table("UCI HAR Dataset/features.txt",
@@ -54,11 +54,10 @@ mergedMeanStdData$subject <- mergedData$subject
 ## tidy data set
 library(dplyr)
 mergedMeanStdData <- arrange(mergedMeanStdData, subject, activity.label.name)
-write.csv(mergedMeanStdData, "./tidy_dataset_1.csv")
 
 ## create the second tidy data set
 library(reshape2)
 meltData <- melt(mergedMeanStdData, id=c("subject", "activity.label.name"))
 dcastMean <- dcast(meltData, formula = subject + activity.label.name ~ variable,
                    mean, na.rm = TRUE)
-write.csv(dcastMean, "./tidy_dataset_2_summarymean.csv")
+write.table(dcastMean, "./tidy_dataset_2_summarymean.txt", row=FALSE)
