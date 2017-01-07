@@ -11,12 +11,13 @@
 ## read column names
 features <- read.table("UCI HAR Dataset/features.txt",
                                 colClasses = c("integer", "character"))
+
 features <- as.vector(features[, 2])
 
 ## read train data set
 train <- read.table("UCI HAR Dataset/train/X_train.txt", col.names = features,
-                    colClasses = c(rep("numeric", 561)))
-
+                    check.names = FALSE, colClasses = c(rep("numeric", 561)))
+##print(names(train))
 ## read train subject
 train$subject <- read.table("UCI HAR Dataset/train/subject_train.txt")[, 1]
 
@@ -25,7 +26,7 @@ train$activity.label.id <- read.table("UCI HAR Dataset/train/y_train.txt")[, 1]
 
 ## read test data set
 test <- read.table("UCI HAR Dataset/test/X_test.txt", col.names = features,
-                    colClasses = c(rep("numeric", 561)))
+                   check.names = FALSE, colClasses = c(rep("numeric", 561)))
 
 ## read train subject
 test$subject <- read.table("UCI HAR Dataset/test/subject_test.txt")[, 1]
@@ -37,8 +38,9 @@ test$activity.label.id <- read.table("UCI HAR Dataset/test/y_test.txt")[, 1]
 mergedData <- rbind(train, test)
 
 ## include only columns for mean and standard deviation
-mergedMeanStdData <- mergedData[, grepl("mean|std", names(mergedData))]
-
+##print(names(mergedData))
+mergedMeanStdData <- mergedData[, grepl("mean\\(\\)|std\\(\\)", names(mergedData))]
+##print(names(mergedMeanStdData))
 ## read activity_labels.txt
 activityLabels <- read.table("UCI HAR Dataset/activity_labels.txt",
                              colClasses = c("integer", "character"))
@@ -60,4 +62,5 @@ library(reshape2)
 meltData <- melt(mergedMeanStdData, id=c("subject", "activity.label.name"))
 dcastMean <- dcast(meltData, formula = subject + activity.label.name ~ variable,
                    mean, na.rm = TRUE)
+
 write.table(dcastMean, "./tidy_dataset_2_summarymean.txt", row=FALSE)
